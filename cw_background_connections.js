@@ -171,6 +171,7 @@ async function onHeadersReceived(details) {
 	// only query securityInfo and then quickly return
 	// checkConnection() is executed async
 	// this makes blocking the request as short as possible
+        if(details.fromCache) return;
 	const securityInfo = await browser.webRequest.getSecurityInfo(details.requestId, {});
 	checkConnection(details.url, securityInfo, details.tabId);
 }
